@@ -1,0 +1,50 @@
+{
+  "env": {
+    "CLAUDE_CODE_MAX_OUTPUT_TOKENS": "32000",
+    "MCP_TIMEOUT": "120000",
+    "ENABLE_TOOL_SEARCH": "true"
+  },
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "mcp__chrome-devtools",
+      "mcp__slack__slack_post_message",
+      "mcp__slack__slack_get_users",
+      "mcp__slack__slack_list_channels",
+      "Bash(git worktree add:*)",
+      "Bash(git worktree list:*)",
+      "Bash(gh pr view:*)"
+    ],
+    "deny": [
+      "Bash(sudo:*)",
+      "Bash(git rebase:*)",
+      "Read(.env.*)",
+      "Read(id_rsa)",
+      "Read(id_ed25519)",
+      "Read(**/*token*)",
+      "Read(**/*key*)",
+      "Write(.env*)",
+      "Write(**/secrets/**)",
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(nc:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm remove:*)",
+      "Bash(psql:*)",
+      "Bash(mysql:*)",
+      "Bash(mongod:*)"
+    ],
+    "ask": [
+      "Bash(rm:*)",
+      "Bash(rm -rf:*)",
+      "Bash(git reset:*)",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(git checkout:*)",
+      "Bash(git worktree remove:*)",
+      "Bash(gh:*)"
+    ]
+  },
+  "language": "japanese",
+  "defaultMode": "acceptEdits"
+}
