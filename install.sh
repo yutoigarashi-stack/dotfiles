@@ -13,5 +13,7 @@ echo "ghostty/config -> $GHOSTTY_CONFIG_DIR/config"
 mkdir -p "$HOME/.claude"
 ln -snf "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
 echo "claude/settings.json -> ~/.claude/settings.json"
+ln -snf "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+echo "claude/CLAUDE.md -> ~/.claude/CLAUDE.md"
 
 echo "完了"
