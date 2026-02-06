@@ -1,5 +1,16 @@
 # CLAUDE.md
 
+## 開発フロー
+
+- **開発モデル**: trunk-based development
+- **ブランチ戦略**: `main` ブランチからトピックブランチを作成し、1 PR につき 1 ブランチ
+  - 指定がない限り PR / トピックブランチの作成は必須
+- **ブランチ命名規則**: `<type>/<kebab-case-description>` 形式
+  - type は Conventional Commits の type に準拠
+  - 例: `docs/add-claude-md`, `refactor/install-script-link-function`
+- **マージ方法**: squash merge で `main` へマージ
+- **ブランチ削除**: マージ後、ローカルブランチは削除する。リモートブランチは削除しない（コミットメッセージの PR 番号から作業記録を辿れるようにするため）
+
 ## Git コミットメッセージ規約
 
 - コミットメッセージは必ず**日本語**で記述すること
