@@ -1,5 +1,14 @@
 # CLAUDE.md
 
+## 開発フロー
+
+- **開発モデル**: trunk-based development に類似した体制
+- **ブランチ戦略**: `main` ブランチから短命のフィーチャーブランチを作成
+- **ブランチ命名規則**: `<type>/<description>` 形式
+  - type は Conventional Commits の type に準拠
+  - 例: `docs/add-claude-md`, `refactor/install-script-link-function`
+- **マージ方法**: squash merge で `main` へマージ
+
 ## Git コミットメッセージ規約
 
 - コミットメッセージは必ず**日本語**で記述すること
