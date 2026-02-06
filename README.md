@@ -5,8 +5,6 @@
 ## セットアップ
 
 ```bash
-git clone <repo-url> ~/dev/dotfiles
-cd ~/dev/dotfiles
 chmod +x install.sh
 ./install.sh
 ```
