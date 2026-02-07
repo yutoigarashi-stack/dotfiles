@@ -9,6 +9,8 @@
   - type は Conventional Commits の type に準拠
   - 例: `docs/add-claude-md`, `refactor/install-script-link-function`
 - **マージ方法**: squash merge で `main` へマージ
+  - コミットメッセージの末尾に PR 番号を付与すること（例: `feat(auth): ログイン機能を追加 (#7)`）
+  - `gh pr merge <number> --squash --subject "<type>(<scope>): <説明> (#<number>)"` を使用
 - **ブランチ削除**: マージ後、ローカルブランチは削除する。リモートブランチは削除しない（コミットメッセージの PR 番号から作業記録を辿れるようにするため）
 
 ## Git コミットメッセージ規約
