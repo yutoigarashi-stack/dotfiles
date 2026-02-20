@@ -29,6 +29,12 @@ link_file() {
     echo "$name -> $dest"
 }
 
+# fish
+if ! brew list fish &>/dev/null; then
+    echo "fish をインストールしています..."
+    brew install fish
+fi
+
 # Ghostty
 GHOSTTY_CONFIG_DIR="$HOME/Library/Application Support/com.mitchellh.ghostty"
 mkdir -p "$GHOSTTY_CONFIG_DIR"
