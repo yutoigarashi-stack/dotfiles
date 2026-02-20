@@ -1,3 +1,5 @@
+command = /opt/homebrew/bin/fish
+
 theme = Atom
 font-family = "JetBrains Mono", "BIZ UDGothic"
 font-size = 16
