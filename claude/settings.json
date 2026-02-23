@@ -16,7 +16,8 @@
       "Bash(git worktree add:*)",
       "Bash(git worktree list:*)",
       "Bash(gh pr view:*)",
-      "Bash(gh issue create:*)"
+      "Bash(gh issue create:*)",
+      "Bash(gh issue list:*)"
     ],
     "deny": [
       "Bash(sudo:*)",
