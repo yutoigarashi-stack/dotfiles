@@ -15,7 +15,8 @@
       "mcp__slack__slack_list_channels",
       "Bash(git worktree add:*)",
       "Bash(git worktree list:*)",
-      "Bash(gh pr view:*)"
+      "Bash(gh pr view:*)",
+      "Bash(gh issue create:*)"
     ],
     "deny": [
       "Bash(sudo:*)",
