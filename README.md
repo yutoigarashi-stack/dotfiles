@@ -15,8 +15,7 @@ chmod +x install.sh
 | --- | --- |
 | `ghostty/config` | `~/Library/Application Support/com.mitchellh.ghostty/config` |
 | `claude/settings.json` | `~/.claude/settings.json` |
-| `claude/CLAUDE.md` | `~/.claude/CLAUDE.md` |
-| `claude/CLAUDE.md` | `~/.codex/AGENTS.md` |
+| `claude/CLAUDE.md` | `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md` |
 | `codex/config.toml` | `~/.codex/config.toml` |
 | `nvim/init.lua` | `~/.config/nvim/init.lua` |
 | `.tmux.conf` | `~/.tmux.conf` |
