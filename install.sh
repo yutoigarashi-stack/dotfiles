@@ -50,6 +50,10 @@ mkdir -p "$HOME/.codex"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.codex/AGENTS.md" "codex/AGENTS.md"
 link_file "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml" "codex/config.toml"
 
+# Neovim
+mkdir -p "$HOME/.config/nvim"
+link_file "$DOTFILES_DIR/nvim/init.lua" "$HOME/.config/nvim/init.lua" "nvim/init.lua"
+
 # tmux
 link_file "$DOTFILES_DIR/.tmux.conf" "$HOME/.tmux.conf" ".tmux.conf"
 
