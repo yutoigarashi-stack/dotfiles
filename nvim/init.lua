@@ -26,11 +26,8 @@ require("lazy").setup({
     opts = {
       theme = "hyper",
       config = {
-        week_header = { enable = true },
-        shortcut = {
-          { desc = " Find File", group = "DashboardShortCut", action = "Telescope find_files", key = "f" },
-          { desc = " Recent Files", group = "DashboardShortCut", action = "Telescope oldfiles", key = "r" },
-          { desc = " Quit", group = "DashboardShortCut", action = "qa", key = "q" },
+        week_header = {
+          enable = true,
         },
       },
     },
