@@ -52,7 +52,7 @@ require("lazy").setup({
     "MeanderingProgrammer/render-markdown.nvim",
     ft = { "markdown" },
     opts = {
-      enabled = false,
+      enabled = true,
     },
   },
 })
