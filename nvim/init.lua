@@ -18,7 +18,35 @@ vim.g.maplocalleader = " "
 
 -- lazy.nvim セットアップ
 require("lazy").setup({
-  -- ここにプラグインを追加
-  -- 例:
-  -- { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  -- dashboard-nvim: スタートアップ画面
+  {
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      theme = "hyper",
+      config = {
+        week_header = { enable = true },
+        shortcut = {
+          { desc = " Find File", group = "DashboardShortCut", action = "Telescope find_files", key = "f" },
+          { desc = " Recent Files", group = "DashboardShortCut", action = "Telescope oldfiles", key = "r" },
+          { desc = " Quit", group = "DashboardShortCut", action = "qa", key = "q" },
+        },
+      },
+    },
+  },
+
+  -- dropbar.nvim: ウィンバーにパンくずリストを表示
+  {
+    "Bekaboo/dropbar.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {},
+  },
+
+  -- nvim-scrollbar: スクロールバーを表示
+  {
+    "petertriho/nvim-scrollbar",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {},
+  },
 })
