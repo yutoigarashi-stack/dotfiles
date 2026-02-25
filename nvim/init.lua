@@ -46,4 +46,13 @@ require("lazy").setup({
     event = { "BufReadPost", "BufNewFile" },
     opts = {},
   },
+
+  -- render-markdown.nvim: バッファ内で Markdown をリッチ表示
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown" },
+    opts = {
+      enabled = true,
+    },
+  },
 })
