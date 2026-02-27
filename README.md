@@ -18,4 +18,7 @@ chmod +x install.sh
 | `claude/CLAUDE.md` | `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md` |
 | `codex/config.toml` | `~/.codex/config.toml` |
 | `nvim/init.lua` | `~/.config/nvim/init.lua` |
+| `claude/agents/` | `~/.claude/agents/` |
+| `claude/skills/` | `~/.claude/skills/` |
+| `claude/commands/` | `~/.claude/commands/` |
 | `.tmux.conf` | `~/.tmux.conf` |
