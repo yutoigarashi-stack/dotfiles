@@ -1,4 +1,5 @@
 ---
+name: codex-implement
 description: 実装タスクを Codex に委譲して Claude Code のトークンを節約する
 ---
 
