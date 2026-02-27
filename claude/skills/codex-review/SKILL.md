@@ -1,4 +1,5 @@
 ---
+name: codex-review
 description: 現在の変更に対して Codex によるコードレビューを実行する
 ---
 
