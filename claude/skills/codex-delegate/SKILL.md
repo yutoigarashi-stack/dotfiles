@@ -5,10 +5,12 @@ description: 反復的な実装タスクを Codex CLI に委譲して Claude Cod
 
 # codex-delegate
 
-反復的な実装タスクを Codex CLI に委譲し、結果を確認して要約する skill。
+反復的な実装タスクを Codex CLI に委譲し、実装とファイル編集を実行させたうえで結果を確認して要約する skill。
 
 ## 委譲対象
 
+- 機能追加や不具合修正の実装
+- 実装に必要なファイル編集
 - テスト作成と反復修正
 - lint / format エラーの一括修正
 - ボイラープレート生成
@@ -23,12 +25,41 @@ description: 反復的な実装タスクを Codex CLI に委譲して Claude Cod
 
 ## 実行フロー
 
-1. Codex にタスクを渡して新規実行する
+1. Codex に最小入力フォーマットでタスクを渡して新規実行する
 2. セッション ID を `${TMPDIR:-/tmp}/codex-session-id` に保存する
 3. 必要時は `codex exec resume` で継続する
 4. `git diff` で変更内容を確認する
 5. プロジェクトのテストを実行する
 6. 変更内容とテスト結果を要約して返す
+
+## 入力フォーマット（必須）
+
+Codex へ渡す初回入力は次の 4 項目のみを使う。
+
+- `Task`: 1-2 文で目的を記述
+- `Scope`: 主対象のファイルまたはディレクトリ
+- `Acceptance`: 受け入れ条件を 3 件以内
+- `Constraints`: 禁止事項または技術制約
+
+`Scope` は主対象を示す目安であり、実装完了を優先して変更範囲は制限しない。
+不要な背景説明、過去ログ、巨大 diff の全文貼り付けは避ける。
+
+## 出力フォーマット（必須, JSON 優先）
+
+Codex の最終出力は JSON を優先し、次のキーを必須とする。
+
+- `summary` (string)
+- `changed_files` (string array)
+- `validation` (string array)
+
+長文の設計説明やコード再掲を求めない。
+
+## 用途の分離
+
+- 実装委譲 (`codex-delegate` / `codex-implement`): 最小入力で実装と編集を実行する
+- レビュー委譲 (`codex-reviewer`): diff を使った検証に限定する
+
+巨大 diff の全文投入はレビュー用途に限定し、実装委譲では使わない。
 
 ## 重要
 
