@@ -3,7 +3,7 @@ name: codex-implement
 description: 実装タスクを Codex に委譲して Claude Code のトークンを節約する
 ---
 
-実装タスクを Codex CLI に委譲して実行してください。
+実装タスクを Codex CLI に委譲し、コード実装とファイル編集まで実行してください。
 
 ## 引数
 
@@ -13,13 +13,13 @@ description: 実装タスクを Codex に委譲して Claude Code のトーク�
 初回入力は次の 4 項目で構成する。
 
 - `Task`: 1-2 文で目的を記述
-- `Scope`: 対象ファイルまたは対象ディレクトリのみ
+- `Scope`: 主対象のファイルまたは対象ディレクトリ
 - `Acceptance`: 受け入れ条件を 3 件以内
 - `Constraints`: 禁止事項または技術制約
 
 ## 実行フロー
 
-1. Level 1（最小入力）で Codex に `$ARGUMENTS` を渡して新規実行する
+1. Level 1（最小入力）で Codex に `$ARGUMENTS` を渡し、実装と必要なファイル編集を実行させる
 2. セッション ID を `${TMPDIR:-/tmp}/codex-session-id` に保存する
 3. `git diff` で変更内容を確認する
 4. プロジェクトのテストを実行する
@@ -34,6 +34,7 @@ description: 実装タスクを Codex に委譲して Claude Code のトーク�
 - `Level 3`: 前回との差分指示のみを `Delta` として追加する
 
 `resume` 時は `Failure` と `Delta` のみを追記し、背景説明や過去ログの再掲を避ける。
+`Scope` は主対象であり、実装完了に必要な関連編集は許可する。
 
 ## 出力フォーマット（固定）
 

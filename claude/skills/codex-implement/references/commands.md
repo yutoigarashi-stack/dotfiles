@@ -7,6 +7,9 @@ CODEX_TMPDIR="${TMPDIR:-/tmp}"
 PROMPT=$(cat <<EOF
 $ARGUMENTS
 
+実装を完了するために、必要なファイル編集を実際に実行してください。
+Scope は主対象を示すもので、関連する最小限の変更は許可します。
+
 出力は次の3セクションのみ:
 - Summary
 - Changed Files
@@ -33,6 +36,8 @@ $FAILURE
 
 Delta:
 $DELTA
+
+不足分の実装と必要なファイル編集を実際に実行してください。
 
 出力は次の3セクションのみ:
 - Summary
