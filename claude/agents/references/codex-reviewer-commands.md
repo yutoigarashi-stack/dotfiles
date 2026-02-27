@@ -37,6 +37,8 @@ echo "$SESSION_ID" > "${CODEX_TMPDIR}/codex-review-session-id"
 
 ## resume セッション
 
+このテンプレートは resume 専用。初回実行でセッション ID がない場合は新規セッションテンプレートを使う。
+
 ```bash
 set -o pipefail
 CODEX_TMPDIR="${TMPDIR:-/tmp}"
