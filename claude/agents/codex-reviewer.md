@@ -5,7 +5,7 @@ tools:
   - Bash
   - Read
   - Grep
-model: haiku
+model: sonnet
 ---
 
 # codex-reviewer
