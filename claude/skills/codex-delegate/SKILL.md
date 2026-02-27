@@ -5,43 +5,32 @@ description: 反復的な実装タスクを Codex CLI に委譲して Claude Cod
 
 # codex-delegate
 
-反復的な実装タスクを Codex CLI に委譲し、Claude Code のトークン消費を節約する skill。
+反復的な実装タスクを Codex CLI に委譲し、結果を確認して要約する skill。
 
-## 委譲すべきタスク
+## 委譲対象
 
-- テストの作成とパスするまでの反復
+- テスト作成と反復修正
 - lint / format エラーの一括修正
 - ボイラープレート生成
-- 一括リファクタリング（find-and-replace 的な作業）
+- 一括リファクタリング
 - ドキュメント生成
 
-## 委譲すべきでないタスク
+## 委譲対象外
 
-- アーキテクチャの判断
-- 会話の全コンテキストが必要な複雑なデバッグ
+- アーキテクチャ判断
+- 全会話コンテキストが必要な複雑デバッグ
 - 設計レベルの意思決定
 
-## 実行方法
+## 実行フロー
 
-### 新規タスク
+1. Codex にタスクを渡して新規実行する
+2. セッション ID を `${TMPDIR:-/tmp}/codex-session-id` に保存する
+3. 必要時は `codex exec resume` で継続する
+4. `git diff` で変更内容を確認する
+5. プロジェクトのテストを実行する
+6. 変更内容とテスト結果を要約して返す
 
-```bash
-CODEX_TMPDIR="${TMPDIR:-/tmp}"
-codex exec --sandbox workspace-write "<タスクの説明>"
-SESSION_ID=$(head -1 "$(ls -t ~/.codex/sessions/**/*.jsonl | head -1)" | jq -r '.id')
-echo "$SESSION_ID" > "${CODEX_TMPDIR}/codex-session-id"
-```
+## 重要
 
-### 前回セッションの継続
-
-```bash
-CODEX_TMPDIR="${TMPDIR:-/tmp}"
-SESSION_ID=$(cat "${CODEX_TMPDIR}/codex-session-id")
-codex exec resume "$SESSION_ID" "<追加指示>"
-```
-
-## 委譲後の手順
-
-1. `git diff` で Codex の変更内容を確認する
-2. プロジェクトのテストコマンドを判定して実行する（例: `go test ./...`, `npm test`, `pytest` など）
-3. 変更内容をユーザーに要約する。Codex の成果物をやり直してはならない
+- Codex の成果物を自分でやり直さない
+- 長時間タスクで文脈が劣化した場合は新規セッションへ切り替える

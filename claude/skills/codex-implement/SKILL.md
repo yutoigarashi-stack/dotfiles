@@ -7,32 +7,26 @@ description: 実装タスクを Codex に委譲して Claude Code のトーク�
 
 ## 引数
 
-$ARGUMENTS に実装タスクの説明が含まれています。この引数は必須です。
-引数が空の場合は、タスクの説明を入力するようユーザーに案内してください。
+`$ARGUMENTS` に実装タスクの説明が含まれます。必須です。
+空の場合は、タスク説明の入力を案内してください。
 
-## 手順
+## 実行フロー
 
-1. Codex にタスクを委譲する:
-   ```bash
-   CODEX_TMPDIR="${TMPDIR:-/tmp}"
-   codex exec --sandbox workspace-write "$ARGUMENTS"
-   SESSION_ID=$(head -1 "$(ls -t ~/.codex/sessions/**/*.jsonl | head -1)" | jq -r '.id')
-   echo "$SESSION_ID" > "${CODEX_TMPDIR}/codex-session-id"
-   ```
-2. Codex 完了後、変更内容を確認する:
-   ```bash
-   git diff
-   ```
-3. プロジェクトのテストコマンドを判定して実行する（例: `go test ./...`, `npm test`, `pytest` など）
-4. 実装内容とテスト結果をユーザーに要約する
-5. テストが失敗した場合、resume で Codex に修正を依頼する（最大 3 回）:
-   ```bash
-   codex exec resume "$(cat "${CODEX_TMPDIR}/codex-session-id")" "Tests failed. Fix the failures shown below: <テスト出力>"
-   ```
-6. 3 回のリトライでも解決しない場合は、ユーザーに判断を委ねる
+1. Codex に `$ARGUMENTS` を渡して新規実行する
+2. セッション ID を `${TMPDIR:-/tmp}/codex-session-id` に保存する
+3. `git diff` で変更内容を確認する
+4. プロジェクトのテストを実行する
+5. 失敗時は `codex exec resume` で修正を依頼する（最大 3 回）
+6. 実装内容とテスト結果を要約して返す
+7. 3 回のリトライでも解決しない場合は、ユーザーに判断を委ねる
+
+## 実行テンプレート
+
+詳細なシェル例は以下を参照:
+`claude/skills/codex-implement/references/commands.md`
 
 ## 重要
 
-- Codex の成果物を自分でやり直してはならない
+- Codex の成果物を自分でやり直さない
 - レビュー → 修正のループは最大 3 回まで
-- Codex セッションが長くなりすぎた場合は新規セッションに切り替える
+- 長時間タスクで文脈が劣化した場合は新規セッションへ切り替える
