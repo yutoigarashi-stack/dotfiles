@@ -34,15 +34,15 @@ description: 実装タスクを Codex に委譲して Claude Code のトーク�
 - `Level 3`: 前回との差分指示のみを `Delta` として追加する
 
 `resume` 時は `Failure` と `Delta` のみを追記し、背景説明や過去ログの再掲を避ける。
-`Scope` は主対象であり、実装完了に必要な関連編集は許可する。
+`Scope` は主対象を示す目安であり、実装完了を優先して変更範囲は制限しない。
 
-## 出力フォーマット（固定）
+## 出力フォーマット（固定, JSON 優先）
 
-Codex の最終出力は次の 3 セクション固定で要求する。
+Codex の最終出力は JSON を優先し、次のキーを必須とする。
 
-- `Summary`
-- `Changed Files`
-- `Validation`
+- `summary` (string)
+- `changed_files` (string array)
+- `validation` (string array)
 
 ## 実行テンプレート
 

@@ -41,16 +41,16 @@ Codex へ渡す初回入力は次の 4 項目のみを使う。
 - `Acceptance`: 受け入れ条件を 3 件以内
 - `Constraints`: 禁止事項または技術制約
 
-`Scope` は主対象を示すものであり、実装完了に必要な関連編集は許可する。
+`Scope` は主対象を示す目安であり、実装完了を優先して変更範囲は制限しない。
 不要な背景説明、過去ログ、巨大 diff の全文貼り付けは避ける。
 
-## 出力フォーマット（必須）
+## 出力フォーマット（必須, JSON 優先）
 
-Codex の最終出力は次の 3 セクション固定で要求する。
+Codex の最終出力は JSON を優先し、次のキーを必須とする。
 
-- `Summary`
-- `Changed Files`
-- `Validation`
+- `summary` (string)
+- `changed_files` (string array)
+- `validation` (string array)
 
 長文の設計説明やコード再掲を求めない。
 

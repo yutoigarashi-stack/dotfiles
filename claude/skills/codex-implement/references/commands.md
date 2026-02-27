@@ -8,12 +8,12 @@ PROMPT=$(cat <<EOF
 $ARGUMENTS
 
 実装を完了するために、必要なファイル編集を実際に実行してください。
-Scope は主対象を示すもので、関連する最小限の変更は許可します。
+Scope は主対象を示す目安であり、実装完了を優先して変更範囲は制限しません。
 
-出力は次の3セクションのみ:
-- Summary
-- Changed Files
-- Validation
+最終出力は JSON で、次のキーを必ず含めてください:
+- summary (string)
+- changed_files (string array)
+- validation (string array)
 EOF
 )
 
@@ -38,18 +38,19 @@ Delta:
 $DELTA
 
 不足分の実装と必要なファイル編集を実際に実行してください。
+実装完了を優先して変更範囲は制限しません。
 
-出力は次の3セクションのみ:
-- Summary
-- Changed Files
-- Validation
+最終出力は JSON で、次のキーを必ず含めてください:
+- summary (string)
+- changed_files (string array)
+- validation (string array)
 EOF
 )
 
 codex exec resume "$SESSION_ID" "$PROMPT"
 ```
 
-## 任意: 出力スキーマで固定する
+## 推奨: 出力スキーマで固定する
 
 ```bash
 codex exec --sandbox workspace-write \
