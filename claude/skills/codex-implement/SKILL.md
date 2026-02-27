@@ -19,19 +19,10 @@ description: 実装タスクを Codex に委譲して Claude Code のトーク�
 5. 失敗時は `codex exec resume` で修正を依頼する（最大 3 回）
 6. 実装内容とテスト結果を要約して返す
 
-## 実行例
+## 実行テンプレート
 
-```bash
-CODEX_TMPDIR="${TMPDIR:-/tmp}"
-codex exec --sandbox workspace-write "$ARGUMENTS"
-SESSION_FILE=$(ls -t ~/.codex/sessions/**/*.jsonl | head -1)
-SESSION_ID=$(head -1 "$SESSION_FILE" | jq -r '.id')
-echo "$SESSION_ID" > "${CODEX_TMPDIR}/codex-session-id"
-```
-
-```bash
-codex exec resume "$(cat "${TMPDIR:-/tmp}/codex-session-id")" "<追加指示>"
-```
+詳細なシェル例は以下を参照:
+`claude/skills/codex-implement/references/commands.md`
 
 ## 重要
 
