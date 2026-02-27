@@ -10,22 +10,30 @@ link_file() {
     local dest="$2"
     local name="$3"
 
-    if [[ -e "$dest" || -L "$dest" ]]; then
-        # 既に正しいリンクの場合はスキップ
-        if [[ -L "$dest" && "$(readlink "$dest")" == "$src" ]]; then
-            echo "スキップ: $name (既にリンク済み)"
-            return
-        fi
+    # 既に正しいリンクの場合はスキップ
+    if [[ -L "$dest" && "$(readlink "$dest")" == "$src" ]]; then
+        echo "スキップ: $name (既にリンク済み)"
+        return
+    fi
 
+    # 既存ファイル/ディレクトリがある場合は上書き確認
+    if [[ -e "$dest" || -L "$dest" ]]; then
         echo -n "$dest は既に存在します。上書きしますか? [y/N] "
         read -r answer
         if [[ "$answer" != "y" && "$answer" != "Y" ]]; then
             echo "スキップ: $name"
             return
         fi
+        if [[ -d "$dest" && ! -L "$dest" ]]; then
+            local backup="${dest}.backup.$(date +%Y%m%d%H%M%S)"
+            echo "バックアップ: $dest -> $backup"
+            mv "$dest" "$backup"
+        else
+            rm -f "$dest"
+        fi
     fi
 
-    ln -snf "$src" "$dest"
+    ln -s "$src" "$dest"
     echo "$name -> $dest"
 }
 
@@ -44,6 +52,9 @@ link_file "$DOTFILES_DIR/ghostty/config" "$GHOSTTY_CONFIG_DIR/config" "ghostty/c
 mkdir -p "$HOME/.claude"
 link_file "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json" "claude/settings.json"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md" "claude/CLAUDE.md"
+link_file "$DOTFILES_DIR/claude/agents" "$HOME/.claude/agents" "claude/agents"
+link_file "$DOTFILES_DIR/claude/skills" "$HOME/.claude/skills" "claude/skills"
+link_file "$DOTFILES_DIR/claude/commands" "$HOME/.claude/commands" "claude/commands"
 
 # Codex
 mkdir -p "$HOME/.codex"
