@@ -17,8 +17,8 @@ chmod +x install.sh
 | `claude/settings.json` | `~/.claude/settings.json` |
 | `claude/CLAUDE.md` | `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md` |
 | `codex/config.toml` | `~/.codex/config.toml` |
+| `claude/skills/` | `~/.claude/skills/`, `~/.codex/skills/` |
 | `nvim/init.lua` | `~/.config/nvim/init.lua` |
 | `claude/agents/` | `~/.claude/agents/` |
-| `claude/skills/` | `~/.claude/skills/` |
 | `claude/commands/` | `~/.claude/commands/` |
 | `.tmux.conf` | `~/.tmux.conf` |

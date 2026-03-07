@@ -60,6 +60,7 @@ link_file "$DOTFILES_DIR/claude/commands" "$HOME/.claude/commands" "claude/comma
 mkdir -p "$HOME/.codex"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.codex/AGENTS.md" "codex/AGENTS.md"
 link_file "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml" "codex/config.toml"
+link_file "$DOTFILES_DIR/claude/skills" "$HOME/.codex/skills" "codex/skills"
 
 # Neovim
 mkdir -p "$HOME/.config/nvim"
