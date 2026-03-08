@@ -47,6 +47,53 @@ require("lazy").setup({
     opts = {},
   },
 
+  -- nvim-hlslens: 検索結果の位置と件数をレンズ表示
+  {
+    "kevinhwang91/nvim-hlslens",
+    event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      require("hlslens").setup()
+
+      local kopts = { noremap = true, silent = true }
+      vim.keymap.set(
+        "n",
+        "n",
+        [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+        kopts
+      )
+      vim.keymap.set(
+        "n",
+        "N",
+        [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+        kopts
+      )
+      vim.keymap.set("n", "*", [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+      vim.keymap.set("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+      vim.keymap.set("n", "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+      vim.keymap.set("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+
+      local ok, search = pcall(require, "scrollbar.handlers.search")
+      if ok then
+        search.setup()
+      end
+    end,
+  },
+
+  -- vim-illuminate: カーソル下の単語をハイライト
+  {
+    "RRethy/vim-illuminate",
+    event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      require("illuminate").configure({
+        delay = 200,
+        large_file_cutoff = 2000,
+        large_file_overrides = {
+          providers = { "lsp" },
+        },
+      })
+    end,
+  },
+
   -- render-markdown.nvim: バッファ内で Markdown をリッチ表示
   {
     "MeanderingProgrammer/render-markdown.nvim",
