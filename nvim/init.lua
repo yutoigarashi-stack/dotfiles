@@ -33,10 +33,22 @@ require("lazy").setup({
     },
   },
 
-  -- dropbar.nvim: ウィンバーにパンくずリストを表示
+  -- lualine.nvim: ステータスラインをカスタマイズ
   {
-    "Bekaboo/dropbar.nvim",
+    "nvim-lualine/lualine.nvim",
     event = { "BufReadPost", "BufNewFile" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {},
+  },
+
+  -- barbecue.nvim: ウィンバーに VS Code 風パンくずリストを表示
+  {
+    "utilyre/barbecue.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons",
+    },
     opts = {},
   },
 
