@@ -33,6 +33,18 @@ require("lazy").setup({
     },
   },
 
+  -- lualine.nvim: ステータスラインをカスタマイズ
+  {
+    "nvim-lualine/lualine.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      options = {
+        theme = "nord",
+      },
+    },
+  },
+
   -- dropbar.nvim: ウィンバーにパンくずリストを表示
   {
     "Bekaboo/dropbar.nvim",
