@@ -49,7 +49,11 @@ require("lazy").setup({
   {
     "Bekaboo/dropbar.nvim",
     event = { "BufReadPost", "BufNewFile" },
-    opts = {},
+    opts = {
+      icons = {
+        enable = false,
+      },
+    },
   },
 
   -- nvim-scrollbar: スクロールバーを表示
