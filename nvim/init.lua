@@ -48,16 +48,15 @@ require("lazy").setup({
   -- nvim-treesitter: シンタックスハイライトとパーサー管理
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      auto_install = true,
-      highlight = {
-        enable = true,
-      },
-    },
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+    config = function()
+      require("nvim-treesitter").setup()
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          pcall(vim.treesitter.start)
+        end,
+      })
     end,
   },
 
