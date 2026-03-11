@@ -62,5 +62,6 @@
     ]
   },
   "language": "japanese",
-  "defaultMode": "acceptEdits"
+  "defaultMode": "acceptEdits",
+  "effortLevel": "high"
 }
