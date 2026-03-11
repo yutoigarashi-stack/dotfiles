@@ -38,7 +38,11 @@ require("lazy").setup({
     "nvim-lualine/lualine.nvim",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {},
+    opts = {
+      options = {
+        theme = "nord",
+      },
+    },
   },
 
   -- barbecue.nvim: ウィンバーに VS Code 風パンくずリストを表示
