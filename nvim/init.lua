@@ -45,6 +45,22 @@ require("lazy").setup({
     },
   },
 
+  -- nvim-treesitter: シンタックスハイライトとパーサー管理
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      auto_install = true,
+      highlight = {
+        enable = true,
+      },
+    },
+    config = function(_, opts)
+      require("nvim-treesitter.configs").setup(opts)
+    end,
+  },
+
   -- dropbar.nvim: ウィンバーにパンくずリストを表示
   {
     "Bekaboo/dropbar.nvim",
