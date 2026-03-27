@@ -45,6 +45,21 @@ require("lazy").setup({
     },
   },
 
+  -- nvim-treesitter: シンタックスハイライトとパーサー管理
+  {
+    "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    build = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter").setup()
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          pcall(vim.treesitter.start)
+        end,
+      })
+    end,
+  },
+
   -- dropbar.nvim: ウィンバーにパンくずリストを表示
   {
     "Bekaboo/dropbar.nvim",
