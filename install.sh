@@ -61,6 +61,14 @@ mkdir -p "$HOME/.codex"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.codex/AGENTS.md" "codex/AGENTS.md"
 link_file "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml" "codex/config.toml"
 
+# Codex skills (個別にシンボリックリンクを作成)
+for skill_dir in "$DOTFILES_DIR"/codex/skills/*/; do
+    if [[ -d "$skill_dir" ]]; then
+        skill_name="$(basename "$skill_dir")"
+        link_file "${skill_dir%/}" "$HOME/.codex/skills/$skill_name" "codex/skills/$skill_name"
+    fi
+done
+
 # Neovim
 mkdir -p "$HOME/.config/nvim"
 link_file "$DOTFILES_DIR/nvim/init.lua" "$HOME/.config/nvim/init.lua" "nvim/init.lua"
