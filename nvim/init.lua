@@ -67,6 +67,12 @@ require("lazy").setup({
     opts = {
       icons = {
         enable = false,
+        ui = {
+          bar = {
+            separator = " > ",
+            extends = "…",
+          },
+        },
       },
     },
   },
