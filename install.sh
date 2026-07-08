@@ -48,6 +48,10 @@ GHOSTTY_CONFIG_DIR="$HOME/Library/Application Support/com.mitchellh.ghostty"
 mkdir -p "$GHOSTTY_CONFIG_DIR"
 link_file "$DOTFILES_DIR/ghostty/config" "$GHOSTTY_CONFIG_DIR/config" "ghostty/config"
 
+# Herdr
+mkdir -p "$HOME/.config/herdr"
+link_file "$DOTFILES_DIR/herdr/config.toml" "$HOME/.config/herdr/config.toml" "herdr/config.toml"
+
 # Claude Code
 mkdir -p "$HOME/.claude"
 link_file "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json" "claude/settings.json"
