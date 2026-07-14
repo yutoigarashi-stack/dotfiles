@@ -42,6 +42,8 @@ if ! brew list fish &>/dev/null; then
     echo "fish をインストールしています..."
     brew install fish
 fi
+mkdir -p "$HOME/.config/fish"
+link_file "$DOTFILES_DIR/fish/config.fish" "$HOME/.config/fish/config.fish" "fish/config.fish"
 
 # Ghostty
 GHOSTTY_CONFIG_DIR="$HOME/Library/Application Support/com.mitchellh.ghostty"

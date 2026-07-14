@@ -13,6 +13,7 @@ chmod +x install.sh
 
 | ファイル | シンボリックリンク先 |
 | --- | --- |
+| `fish/config.fish` | `~/.config/fish/config.fish` |
 | `ghostty/config` | `~/Library/Application Support/com.mitchellh.ghostty/config` |
 | `claude/settings.json` | `~/.claude/settings.json` |
 | `claude/CLAUDE.md` | `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md` |
