@@ -1,2 +1,24 @@
+# 初回オンボーディング（通知設定の選択画面）を表示しない
+onboarding = false
+
+[theme]
+# Ghostty の Atom テーマに合わせて One Dark 系を使用
+name = "one-dark"
+
 [terminal]
 default_shell = "/opt/homebrew/bin/fish"
+
+[ui.toast]
+# バックグラウンドの workspace でエージェントが完了・入力待ちになったら
+# macOS の通知を出す
+delivery = "system"
+
+[experimental]
+# 日本語 IME が ON のままでも prefix コマンドが効くように、
+# prefix モード中だけ ASCII 入力ソースへ自動切り替え（macOS 専用）
+switch_ascii_input_source_in_prefix = true
+
+# Claude Code のように自前でカーソルを描画する TUI でも、
+# IME の変換候補ウィンドウがカーソル位置に追従するようにする
+reveal_hidden_cursor_for_cjk_ime = true
+cjk_ime_agents = ["claude"]
