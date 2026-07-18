@@ -4,6 +4,14 @@
 
 ## セットアップ
 
+ワンライナーでセットアップする場合:
+
+```bash
+git clone https://github.com/yutoigarashi-stack/dotfiles.git && cd dotfiles && chmod +x install.sh && ./install.sh
+```
+
+既にリポジトリをクローン済みの場合:
+
 ```bash
 chmod +x install.sh
 ./install.sh
