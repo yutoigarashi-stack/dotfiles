@@ -130,13 +130,4 @@ require("lazy").setup({
       })
     end,
   },
-
-  -- render-markdown.nvim: バッファ内で Markdown をリッチ表示
-  {
-    "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "markdown" },
-    opts = {
-      enabled = true,
-    },
-  },
 })
