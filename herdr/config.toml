@@ -10,8 +10,8 @@ default_shell = "/opt/homebrew/bin/fish"
 
 [ui.toast]
 # バックグラウンドの workspace でエージェントが完了・入力待ちになったら
-# macOS の通知を出す
-delivery = "system"
+# ターミナル内トーストで通知する
+delivery = "terminal"
 
 [experimental]
 # 日本語 IME が ON のままでも prefix コマンドが効くように、
