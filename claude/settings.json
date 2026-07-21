@@ -78,5 +78,6 @@
   },
   "language": "japanese",
   "defaultMode": "acceptEdits",
-  "effortLevel": "high"
+  "effortLevel": "high",
+  "tui": "default"
 }
