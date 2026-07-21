@@ -23,4 +23,3 @@ chmod +x install.sh
 | `claude/skills/` | `~/.claude/skills/` |
 | `claude/commands/` | `~/.claude/commands/` |
 | `codex/skills/*/` | `~/.codex/skills/*/`（個別リンク） |
-| `.tmux.conf` | `~/.tmux.conf` |

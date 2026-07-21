@@ -79,7 +79,4 @@ done
 mkdir -p "$HOME/.config/nvim"
 link_file "$DOTFILES_DIR/nvim/init.lua" "$HOME/.config/nvim/init.lua" "nvim/init.lua"
 
-# tmux
-link_file "$DOTFILES_DIR/.tmux.conf" "$HOME/.tmux.conf" ".tmux.conf"
-
 echo "完了"
