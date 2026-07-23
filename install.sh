@@ -37,6 +37,59 @@ link_file() {
     echo "$name -> $dest"
 }
 
+# skills の配置先を、個別リンクを格納できる実ディレクトリにする
+prepare_skills_directory() {
+    local dest="$1"
+    local legacy_src="$2"
+    local name="$3"
+    local answer
+    local backup
+
+    # 旧方式のディレクトリ全体リンクは、リンクだけを外して移行する
+    if [[ -L "$dest" && "$(readlink "$dest")" == "$legacy_src" ]]; then
+        rm -f "$dest"
+        echo "移行: $name のディレクトリ全体リンクを個別リンク方式へ変更"
+    elif [[ -L "$dest" ]]; then
+        echo -n "$dest は別のシンボリックリンクです。バックアップして個別リンク方式へ変更しますか? [y/N] "
+        read -r answer
+        if [[ "$answer" != "y" && "$answer" != "Y" ]]; then
+            echo "スキップ: $name"
+            return 1
+        fi
+        backup="${dest}.backup.$(date +%Y%m%d%H%M%S)"
+        mv "$dest" "$backup"
+        echo "バックアップ: $dest -> $backup"
+    elif [[ -e "$dest" && ! -d "$dest" ]]; then
+        echo -n "$dest はディレクトリではありません。バックアップして個別リンク方式へ変更しますか? [y/N] "
+        read -r answer
+        if [[ "$answer" != "y" && "$answer" != "Y" ]]; then
+            echo "スキップ: $name"
+            return 1
+        fi
+        backup="${dest}.backup.$(date +%Y%m%d%H%M%S)"
+        mv "$dest" "$backup"
+        echo "バックアップ: $dest -> $backup"
+    fi
+
+    mkdir -p "$dest"
+}
+
+# リポジトリ内の各 skill を配置先へ個別にリンクする
+link_skills() {
+    local src_dir="$1"
+    local dest_dir="$2"
+    local name_prefix="$3"
+    local skill_dir
+
+    for skill_dir in "$src_dir"/*/; do
+        if [[ -d "$skill_dir" ]]; then
+            local skill_name
+            skill_name="$(basename "$skill_dir")"
+            link_file "${skill_dir%/}" "$dest_dir/$skill_name" "$name_prefix/$skill_name"
+        fi
+    done
+}
+
 # fish
 if ! brew list fish &>/dev/null; then
     echo "fish をインストールしています..."
@@ -59,21 +112,18 @@ mkdir -p "$HOME/.claude"
 link_file "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json" "claude/settings.json"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md" "claude/CLAUDE.md"
 link_file "$DOTFILES_DIR/claude/agents" "$HOME/.claude/agents" "claude/agents"
-link_file "$DOTFILES_DIR/claude/skills" "$HOME/.claude/skills" "claude/skills"
 link_file "$DOTFILES_DIR/claude/commands" "$HOME/.claude/commands" "claude/commands"
+if prepare_skills_directory "$HOME/.claude/skills" "$DOTFILES_DIR/claude/skills" "claude/skills"; then
+    link_skills "$DOTFILES_DIR/claude/skills" "$HOME/.claude/skills" "claude/skills"
+fi
 
 # Codex
 mkdir -p "$HOME/.codex"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.codex/AGENTS.md" "codex/AGENTS.md"
 link_file "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml" "codex/config.toml"
-
-# Codex skills (個別にシンボリックリンクを作成)
-for skill_dir in "$DOTFILES_DIR"/codex/skills/*/; do
-    if [[ -d "$skill_dir" ]]; then
-        skill_name="$(basename "$skill_dir")"
-        link_file "${skill_dir%/}" "$HOME/.codex/skills/$skill_name" "codex/skills/$skill_name"
-    fi
-done
+if prepare_skills_directory "$HOME/.codex/skills" "" "codex/skills"; then
+    link_skills "$DOTFILES_DIR/codex/skills" "$HOME/.codex/skills" "codex/skills"
+fi
 
 # Neovim
 mkdir -p "$HOME/.config/nvim"
