@@ -20,6 +20,6 @@ chmod +x install.sh
 | `codex/config.toml` | `~/.codex/config.toml` |
 | `nvim/init.lua` | `~/.config/nvim/init.lua` |
 | `claude/agents/` | `~/.claude/agents/` |
-| `claude/skills/` | `~/.claude/skills/` |
+| `claude/skills/*/` | `~/.claude/skills/*/`（個別リンク） |
 | `claude/commands/` | `~/.claude/commands/` |
 | `codex/skills/*/` | `~/.codex/skills/*/`（個別リンク） |
