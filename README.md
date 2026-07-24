@@ -20,6 +20,15 @@ chmod +x install.sh
 | `codex/config.toml` | `~/.codex/config.toml` |
 | `nvim/init.lua` | `~/.config/nvim/init.lua` |
 | `claude/agents/` | `~/.claude/agents/` |
-| `claude/skills/*/` | `~/.claude/skills/*/`（個別リンク） |
 | `claude/commands/` | `~/.claude/commands/` |
-| `codex/skills/*/` | `~/.codex/skills/*/`（個別リンク） |
+
+## Agent plugins
+
+`install.sh` はmarketplace
+[`yutoigarashi-stack/agent-skills`](https://github.com/yutoigarashi-stack/agent-skills)
+をCodexとClaude Codeへ登録し、`anki-workflows` pluginをインストールする。
+
+pluginの導入に成功すると、dotfilesが作成した次の旧skillリンクだけを削除する。
+
+- `anki-add-cards`
+- `reminders-to-anki`
