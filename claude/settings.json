@@ -43,7 +43,6 @@
       "Read(**/.htpasswd)",
       "Edit(.env*)",
       "Edit(**/secrets/**)",
-      "Bash(curl:*)",
       "Bash(wget:*)",
       "Bash(nc:*)",
       "Bash(npm uninstall:*)",
@@ -53,6 +52,7 @@
       "Bash(mongod:*)"
     ],
     "ask": [
+      "Bash(curl:*)",
       "Bash(rm:*)",
       "Bash(rm -rf:*)",
       "Bash(git rebase:*)",
