@@ -24,7 +24,7 @@ chmod +x install.sh
 
 ## Agent plugins
 
-`install.sh` はprivate marketplace
+`install.sh` はmarketplace
 [`yutoigarashi-stack/agent-skills`](https://github.com/yutoigarashi-stack/agent-skills)
 をCodexとClaude Codeへ登録し、`anki-workflows` pluginをインストールする。
 
