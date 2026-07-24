@@ -79,6 +79,8 @@ if command -v claude &>/dev/null; then
     claude plugin marketplace update yutoigarashi-skills
     claude plugin install anki-workflows@yutoigarashi-skills --scope user
     claude plugin install git-workflows@yutoigarashi-skills --scope user
+    claude plugin update anki-workflows@yutoigarashi-skills --scope user
+    claude plugin update git-workflows@yutoigarashi-skills --scope user
     remove_legacy_skill_link "$HOME/.claude/skills/anki-add-cards" "$DOTFILES_DIR/claude/skills/anki-add-cards" "claude/skills/anki-add-cards"
     remove_legacy_skill_link "$HOME/.claude/skills/reminders-to-anki" "$DOTFILES_DIR/claude/skills/reminders-to-anki" "claude/skills/reminders-to-anki"
 else
