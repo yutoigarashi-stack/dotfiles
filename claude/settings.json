@@ -76,6 +76,17 @@
       "Bash(gh api:*)"
     ]
   },
+  "enabledPlugins": {
+    "anki-workflows@yutoigarashi-skills": true
+  },
+  "extraKnownMarketplaces": {
+    "yutoigarashi-skills": {
+      "source": {
+        "source": "github",
+        "repo": "yutoigarashi-stack/agent-skills"
+      }
+    }
+  },
   "language": "japanese",
   "defaultMode": "acceptEdits",
   "effortLevel": "high",

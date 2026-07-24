@@ -6,3 +6,10 @@ plan_mode_reasoning_effort = "high"
 model = "gpt-5.4"
 model_reasoning_effort = "high"
 
+[marketplaces.yutoigarashi-skills]
+source_type = "git"
+source = "https://github.com/yutoigarashi-stack/agent-skills.git"
+ref = "main"
+
+[plugins."anki-workflows@yutoigarashi-skills"]
+enabled = true

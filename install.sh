@@ -37,57 +37,18 @@ link_file() {
     echo "$name -> $dest"
 }
 
-# skills の配置先を、個別リンクを格納できる実ディレクトリにする
-prepare_skills_directory() {
+# plugin への移行後に、dotfiles が作成した旧 skill リンクだけを外す
+remove_legacy_skill_link() {
     local dest="$1"
-    local legacy_src="$2"
+    local expected_src="$2"
     local name="$3"
-    local answer
-    local backup
 
-    # 旧方式のディレクトリ全体リンクは、リンクだけを外して移行する
-    if [[ -L "$dest" && "$(readlink "$dest")" == "$legacy_src" ]]; then
+    if [[ -L "$dest" && "$(readlink "$dest")" == "$expected_src" ]]; then
         rm -f "$dest"
-        echo "移行: $name のディレクトリ全体リンクを個別リンク方式へ変更"
-    elif [[ -L "$dest" ]]; then
-        echo -n "$dest は別のシンボリックリンクです。バックアップして個別リンク方式へ変更しますか? [y/N] "
-        read -r answer
-        if [[ "$answer" != "y" && "$answer" != "Y" ]]; then
-            echo "スキップ: $name"
-            return 1
-        fi
-        backup="${dest}.backup.$(date +%Y%m%d%H%M%S)"
-        mv "$dest" "$backup"
-        echo "バックアップ: $dest -> $backup"
-    elif [[ -e "$dest" && ! -d "$dest" ]]; then
-        echo -n "$dest はディレクトリではありません。バックアップして個別リンク方式へ変更しますか? [y/N] "
-        read -r answer
-        if [[ "$answer" != "y" && "$answer" != "Y" ]]; then
-            echo "スキップ: $name"
-            return 1
-        fi
-        backup="${dest}.backup.$(date +%Y%m%d%H%M%S)"
-        mv "$dest" "$backup"
-        echo "バックアップ: $dest -> $backup"
+        echo "移行: $name の旧 skill リンクを削除"
+    elif [[ -e "$dest" || -L "$dest" ]]; then
+        echo "維持: $name ($dest はdotfilesが作成した旧リンクではありません)"
     fi
-
-    mkdir -p "$dest"
-}
-
-# リポジトリ内の各 skill を配置先へ個別にリンクする
-link_skills() {
-    local src_dir="$1"
-    local dest_dir="$2"
-    local name_prefix="$3"
-    local skill_dir
-
-    for skill_dir in "$src_dir"/*/; do
-        if [[ -d "$skill_dir" ]]; then
-            local skill_name
-            skill_name="$(basename "$skill_dir")"
-            link_file "${skill_dir%/}" "$dest_dir/$skill_name" "$name_prefix/$skill_name"
-        fi
-    done
 }
 
 # fish
@@ -113,16 +74,28 @@ link_file "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json" "cl
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md" "claude/CLAUDE.md"
 link_file "$DOTFILES_DIR/claude/agents" "$HOME/.claude/agents" "claude/agents"
 link_file "$DOTFILES_DIR/claude/commands" "$HOME/.claude/commands" "claude/commands"
-if prepare_skills_directory "$HOME/.claude/skills" "$DOTFILES_DIR/claude/skills" "claude/skills"; then
-    link_skills "$DOTFILES_DIR/claude/skills" "$HOME/.claude/skills" "claude/skills"
+if command -v claude &>/dev/null; then
+    claude plugin marketplace add yutoigarashi-stack/agent-skills --scope user
+    claude plugin install anki-workflows@yutoigarashi-skills --scope user
+    remove_legacy_skill_link "$HOME/.claude/skills/anki-add-cards" "$DOTFILES_DIR/claude/skills/anki-add-cards" "claude/skills/anki-add-cards"
+    remove_legacy_skill_link "$HOME/.claude/skills/reminders-to-anki" "$DOTFILES_DIR/claude/skills/reminders-to-anki" "claude/skills/reminders-to-anki"
+else
+    echo "スキップ: Anki Workflows plugin (Claude Codeが見つかりません)"
 fi
 
 # Codex
 mkdir -p "$HOME/.codex"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.codex/AGENTS.md" "codex/AGENTS.md"
 link_file "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml" "codex/config.toml"
-if prepare_skills_directory "$HOME/.codex/skills" "" "codex/skills"; then
-    link_skills "$DOTFILES_DIR/codex/skills" "$HOME/.codex/skills" "codex/skills"
+if command -v codex &>/dev/null; then
+    if ! codex plugin list --marketplace yutoigarashi-skills --available --json &>/dev/null; then
+        codex plugin marketplace upgrade yutoigarashi-skills
+    fi
+    codex plugin add anki-workflows@yutoigarashi-skills
+    remove_legacy_skill_link "$HOME/.codex/skills/anki-add-cards" "$DOTFILES_DIR/codex/skills/anki-add-cards" "codex/skills/anki-add-cards"
+    remove_legacy_skill_link "$HOME/.codex/skills/reminders-to-anki" "$DOTFILES_DIR/codex/skills/reminders-to-anki" "codex/skills/reminders-to-anki"
+else
+    echo "スキップ: Anki Workflows plugin (Codexが見つかりません)"
 fi
 
 # Neovim
