@@ -84,7 +84,8 @@
       "source": {
         "source": "github",
         "repo": "yutoigarashi-stack/agent-skills"
-      }
+      },
+      "autoUpdate": true
     }
   },
   "language": "japanese",
