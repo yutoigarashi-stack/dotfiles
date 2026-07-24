@@ -26,7 +26,10 @@ chmod +x install.sh
 
 `install.sh` はmarketplace
 [`yutoigarashi-stack/agent-skills`](https://github.com/yutoigarashi-stack/agent-skills)
-をCodexとClaude Codeへ登録し、`anki-workflows` pluginをインストールする。
+をCodexとClaude Codeへ登録し、次のpluginをインストールする。
+
+- `anki-workflows`
+- `git-workflows`
 
 pluginの導入に成功すると、dotfilesが作成した次の旧skillリンクだけを削除する。
 
