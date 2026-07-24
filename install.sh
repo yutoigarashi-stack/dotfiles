@@ -77,6 +77,7 @@ link_file "$DOTFILES_DIR/claude/commands" "$HOME/.claude/commands" "claude/comma
 if command -v claude &>/dev/null; then
     claude plugin marketplace add yutoigarashi-stack/agent-skills --scope user
     claude plugin install anki-workflows@yutoigarashi-skills --scope user
+    claude plugin install git-workflows@yutoigarashi-skills --scope user
     remove_legacy_skill_link "$HOME/.claude/skills/anki-add-cards" "$DOTFILES_DIR/claude/skills/anki-add-cards" "claude/skills/anki-add-cards"
     remove_legacy_skill_link "$HOME/.claude/skills/reminders-to-anki" "$DOTFILES_DIR/claude/skills/reminders-to-anki" "claude/skills/reminders-to-anki"
 else
@@ -92,6 +93,7 @@ if command -v codex &>/dev/null; then
         codex plugin marketplace upgrade yutoigarashi-skills
     fi
     codex plugin add anki-workflows@yutoigarashi-skills
+    codex plugin add git-workflows@yutoigarashi-skills
     remove_legacy_skill_link "$HOME/.codex/skills/anki-add-cards" "$DOTFILES_DIR/codex/skills/anki-add-cards" "codex/skills/anki-add-cards"
     remove_legacy_skill_link "$HOME/.codex/skills/reminders-to-anki" "$DOTFILES_DIR/codex/skills/reminders-to-anki" "codex/skills/reminders-to-anki"
 else
