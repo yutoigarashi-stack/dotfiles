@@ -76,6 +76,7 @@ link_file "$DOTFILES_DIR/claude/agents" "$HOME/.claude/agents" "claude/agents"
 link_file "$DOTFILES_DIR/claude/commands" "$HOME/.claude/commands" "claude/commands"
 if command -v claude &>/dev/null; then
     claude plugin marketplace add yutoigarashi-stack/agent-skills --scope user
+    claude plugin marketplace update yutoigarashi-skills
     claude plugin install anki-workflows@yutoigarashi-skills --scope user
     claude plugin install git-workflows@yutoigarashi-skills --scope user
     remove_legacy_skill_link "$HOME/.claude/skills/anki-add-cards" "$DOTFILES_DIR/claude/skills/anki-add-cards" "claude/skills/anki-add-cards"
@@ -89,9 +90,8 @@ mkdir -p "$HOME/.codex"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.codex/AGENTS.md" "codex/AGENTS.md"
 link_file "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml" "codex/config.toml"
 if command -v codex &>/dev/null; then
-    if ! codex plugin list --marketplace yutoigarashi-skills --available --json &>/dev/null; then
-        codex plugin marketplace upgrade yutoigarashi-skills
-    fi
+    codex plugin marketplace add yutoigarashi-stack/agent-skills --ref main
+    codex plugin marketplace upgrade yutoigarashi-skills
     codex plugin add anki-workflows@yutoigarashi-skills
     codex plugin add git-workflows@yutoigarashi-skills
     remove_legacy_skill_link "$HOME/.codex/skills/anki-add-cards" "$DOTFILES_DIR/codex/skills/anki-add-cards" "codex/skills/anki-add-cards"
