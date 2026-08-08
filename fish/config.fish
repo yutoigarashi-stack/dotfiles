@@ -1,5 +1,6 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    # npmの代わりにpnpmを使用する
+    alias npm pnpm
 end
 # Homebrew
 eval (/opt/homebrew/bin/brew shellenv fish)
