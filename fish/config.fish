@@ -1,7 +1,3 @@
-if status is-interactive
-    # npmの代わりにpnpmを使用する
-    alias npm pnpm
-end
 # Homebrew
 eval (/opt/homebrew/bin/brew shellenv fish)
 
