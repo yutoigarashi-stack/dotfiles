@@ -1,0 +1,16 @@
+prefix_rule(pattern=["gh", "issue", "view"], decision="allow")
+prefix_rule(pattern=["git", "checkout", "-b"], decision="allow")
+prefix_rule(pattern=["gh", "pr", "create"], decision="allow")
+prefix_rule(pattern=["gh", "pr", "view"], decision="allow")
+prefix_rule(pattern=["gh", "pr", "edit"], decision="allow")
+prefix_rule(pattern=["gh", "pr", "merge"], decision="allow")
+prefix_rule(pattern=["git", "checkout"], decision="allow")
+prefix_rule(pattern=["git", "fetch"], decision="allow")
+prefix_rule(pattern=["go", "test"], decision="allow")
+prefix_rule(pattern=["git", "add", "AGENTS.md", "CLAUDE.md", "Dockerfile", "cc.sh", "compose.yml"], decision="allow")
+prefix_rule(pattern=["gh", "issue", "list"], decision="allow")
+prefix_rule(
+    pattern=["npm", "install"],
+    decision="forbidden",
+    justification="npmではなくpnpmを使用すること",
+)

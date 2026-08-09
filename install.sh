@@ -91,6 +91,8 @@ fi
 mkdir -p "$HOME/.codex"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.codex/AGENTS.md" "codex/AGENTS.md"
 link_file "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml" "codex/config.toml"
+# ファイル単位のリンクではCodexが.rulesを読み込まないため、ディレクトリごとリンクする
+link_file "$DOTFILES_DIR/codex/rules" "$HOME/.codex/rules" "codex/rules"
 if command -v codex &>/dev/null; then
     codex plugin marketplace add yutoigarashi-stack/agent-skills --ref main
     codex plugin marketplace upgrade yutoigarashi-skills

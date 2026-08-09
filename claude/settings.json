@@ -45,6 +45,7 @@
       "Edit(**/secrets/**)",
       "Bash(wget:*)",
       "Bash(nc:*)",
+      "Bash(npm install:*)",
       "Bash(npm uninstall:*)",
       "Bash(npm remove:*)",
       "Bash(psql:*)",
