@@ -60,6 +60,18 @@ require("lazy").setup({
     end,
   },
 
+  -- GraphQL Language Server: GraphQL の補完・診断・定義ジャンプ
+  {
+    "mason-org/mason-lspconfig.nvim",
+    opts = {
+      ensure_installed = { "graphql" },
+    },
+    dependencies = {
+      { "mason-org/mason.nvim", opts = {} },
+      "neovim/nvim-lspconfig",
+    },
+  },
+
   -- dropbar.nvim: ウィンバーにパンくずリストを表示
   {
     "Bekaboo/dropbar.nvim",
