@@ -15,9 +15,11 @@ chmod +x install.sh
 | --- | --- |
 | `fish/config.fish` | `~/.config/fish/config.fish` |
 | `ghostty/config` | `~/Library/Application Support/com.mitchellh.ghostty/config` |
+| `herdr/config.toml` | `~/.config/herdr/config.toml` |
 | `claude/settings.json` | `~/.claude/settings.json` |
 | `claude/CLAUDE.md` | `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md` |
 | `codex/config.toml` | `~/.codex/config.toml` |
+| `codex/rules/` | `~/.codex/rules/` |
 | `nvim/init.lua` | `~/.config/nvim/init.lua` |
 | `claude/agents/` | `~/.claude/agents/` |
 | `claude/commands/` | `~/.claude/commands/` |
