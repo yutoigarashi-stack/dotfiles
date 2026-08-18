@@ -3,6 +3,13 @@ set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
+OS="$(uname -s)"
+case "$OS" in
+    Darwin) OS_TYPE="macos" ;;
+    Linux)  OS_TYPE="linux" ;;
+    *)      echo "未対応の OS: $OS"; exit 1 ;;
+esac
+
 # シンボリックリンクを作成する関数
 # 既存ファイルがある場合は上書きするか確認する
 link_file() {
@@ -52,15 +59,26 @@ remove_legacy_skill_link() {
 }
 
 # fish
-if ! brew list fish &>/dev/null; then
-    echo "fish をインストールしています..."
-    brew install fish
+if [[ "$OS_TYPE" == "macos" ]]; then
+    if ! brew list fish &>/dev/null; then
+        echo "fish をインストールしています..."
+        brew install fish
+    fi
+else
+    if ! command -v fish &>/dev/null; then
+        echo "fish をインストールしています..."
+        sudo apt update && sudo apt install -y fish
+    fi
 fi
 mkdir -p "$HOME/.config/fish"
 link_file "$DOTFILES_DIR/fish/config.fish" "$HOME/.config/fish/config.fish" "fish/config.fish"
 
 # Ghostty
-GHOSTTY_CONFIG_DIR="$HOME/Library/Application Support/com.mitchellh.ghostty"
+if [[ "$OS_TYPE" == "macos" ]]; then
+    GHOSTTY_CONFIG_DIR="$HOME/Library/Application Support/com.mitchellh.ghostty"
+else
+    GHOSTTY_CONFIG_DIR="$HOME/.config/ghostty"
+fi
 mkdir -p "$GHOSTTY_CONFIG_DIR"
 link_file "$DOTFILES_DIR/ghostty/config" "$GHOSTTY_CONFIG_DIR/config" "ghostty/config"
 

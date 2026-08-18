@@ -1,4 +1,4 @@
-command = /opt/homebrew/bin/fish
+command = fish
 
 theme = Atom
 font-family = "JetBrains Mono", "BIZ UDGothic"
