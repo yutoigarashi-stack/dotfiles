@@ -22,3 +22,6 @@ switch_ascii_input_source_in_prefix = true
 # IME の変換候補ウィンドウがカーソル位置に追従するようにする
 reveal_hidden_cursor_for_cjk_ime = true
 cjk_ime_agents = ["claude"]
+
+[ui]
+agent_panel_sort = "priority"
