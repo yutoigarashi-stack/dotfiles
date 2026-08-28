@@ -5,6 +5,10 @@
 - **開発モデル**: trunk-based development
 - **ブランチ戦略**: `main` ブランチからトピックブランチを作成し、1 PR につき 1 ブランチ
   - 指定がない限り PR / トピックブランチの作成は必須
+- **Stacked PR**: 変更が大きい場合や前の PR に依存する変更は、GitHub の stacked PR を活用し、レビュー可能な単位に分割すること
+  - 依存先のトピックブランチから次のトピックブランチを作成し、PR の base を依存先ブランチに設定する（`gh pr create --base <依存先ブランチ>`）
+  - マージは stack の下（`main` に近い PR）から順に行う
+  - 依存先の PR がマージされたら、`git rebase --onto main <依存先ブランチ>` で squash 済みのコミットを取り除き、PR の base を `main` に変更する（`gh pr edit <number> --base main`）
 - **ブランチ命名規則**: `<type>/<kebab-case-description>` 形式
   - type は Conventional Commits の type に準拠
   - 例: `docs/add-claude-md`, `refactor/install-script-link-function`
