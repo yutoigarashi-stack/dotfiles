@@ -15,6 +15,7 @@
   - `gh pr merge <number> --squash --subject "<type>(<scope>): <説明> (#<number>)"` を使用
 - **ブランチ削除**: マージ後、ローカルブランチは削除する。リモートブランチは削除しない（コミットメッセージの PR 番号から作業記録を辿れるようにするため）
 - **Git コマンド**: `git checkout` ではなく、目的別に分離された `git switch`（ブランチ切り替え）と `git restore`（ファイル復元）を使うこと
+- **Git pull**: 未コミットの変更がある状態で `git pull` する場合は `--autostash` を付け、手動の `git stash` / `git stash pop` は使わないこと（stash スタックは worktree 間で共有され、並行セッションのエントリを誤って pop する恐れがあるため。autostash は通常の stash スタックを経由しない）
 
 ## パッケージ管理
 
