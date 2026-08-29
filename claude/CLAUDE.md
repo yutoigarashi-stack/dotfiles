@@ -5,8 +5,10 @@
 - **開発モデル**: trunk-based development
 - **ブランチ戦略**: `main` ブランチからトピックブランチを作成し、1 PR につき 1 ブランチ
   - 指定がない限り PR / トピックブランチの作成は必須
-- **Stacked PR**: 変更が大きい場合や前の PR に依存する変更は、GitHub の stacked PR を活用し、レビュー可能な単位に分割すること
-  - 依存先の PR がマージされたら、`git rebase --onto main <依存先ブランチ>` で squash 済みのコミットを取り除き、PR の base を `main` に変更する（`gh pr edit <number> --base main`）（squash merge によりコミット SHA が変わるうえ、リモートブランチを削除しないため GitHub による base の自動付け替えが効かず、放置すると重複コミットとコンフリクトが上位 PR に残るため）
+- **Stacked PR**: 変更が大きい場合や前の PR に依存する変更は、`gh stack`（`init` / `add` / `submit`）で stacked PR を作り、レビュー可能な単位に分割すること
+  - マージは従来どおり PR ごとに `gh pr merge <number> --squash --subject "..."` で行う（`gh stack merge` は stack 単位のアトミックマージで `--subject` 相当のオプションがなく、コミットメッセージ規約を満たせないため）
+  - 依存先の PR がマージされたら `gh stack sync` を実行する。マージ済みレイヤーの取り除き（`git rebase --onto` 相当）と上位 PR の base 付け替えは `gh stack` が行うため、`git rebase --onto` や `gh pr edit --base` を手動で実行しないこと（手作業と `gh stack` の管理が混在すると stack メタデータと実態が食い違い、sync が diverged 扱いで中断する原因になるため）
+  - マージ済みブランチの削除は `gh stack sync --prune` で行う（削除されるのはローカルブランチのみ）
 - **ブランチ命名規則**: `<type>/<kebab-case-description>` 形式
   - type は Conventional Commits の type に準拠
   - 例: `docs/add-claude-md`, `refactor/install-script-link-function`
