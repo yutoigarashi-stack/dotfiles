@@ -2,7 +2,8 @@
 
 ## 開発フロー
 
-- **開発モデル**: trunk-based development。`main` からトピックブランチを作成し、1 PR につき 1 ブランチ
+- **開発モデル**: trunk-based development
+- **ブランチ戦略**: `main` からトピックブランチを作成し、1 PR につき 1 ブランチ
   - 指定がない限り PR / トピックブランチの作成は必須
 - **ブランチ命名規則**: `<type>/<kebab-case-description>`（type はコミットメッセージ規約の type に準拠。例: `docs/add-claude-md`）
 - **マージ方法**: `gh pr merge <number> --squash --subject "<type>(<scope>): <説明> (#<number>)"` で squash merge する（末尾に PR 番号を付与すること）
