@@ -28,10 +28,12 @@ agent_panel_sort = "priority"
 
 # タブレイアウトを変えずに、一時的なシェルをポップアップで開く
 # （コマンド終了までセッションモーダル。Escape を含む全入力はポップアップ側が受け取る）
+# command は /bin/sh -c 経由で実行され、$SHELL はログインシェル (/bin/bash) に
+# なるため使わない。PATH 上の fish を起動し、無ければ sh にフォールバックする
 [[keys.command]]
 key = "prefix+t"
 type = "popup"
-command = "exec \"${SHELL:-sh}\""
+command = "exec \"$(command -v fish || echo sh)\""
 description = "open scratch terminal"
 width = "80%"
 height = "80%"
