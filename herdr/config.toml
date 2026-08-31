@@ -25,3 +25,13 @@ cjk_ime_agents = ["claude"]
 
 [ui]
 agent_panel_sort = "priority"
+
+# タブレイアウトを変えずに、一時的なシェルをポップアップで開く
+# （コマンド終了までセッションモーダル。Escape を含む全入力はポップアップ側が受け取る）
+[[keys.command]]
+key = "prefix+t"
+type = "popup"
+command = "exec \"${SHELL:-sh}\""
+description = "open scratch terminal"
+width = "80%"
+height = "80%"
