@@ -23,6 +23,7 @@ chmod +x install.sh
 | `nvim/init.lua` | `~/.config/nvim/init.lua` |
 | `claude/agents/` | `~/.claude/agents/` |
 | `claude/commands/` | `~/.claude/commands/` |
+| `herdr --skill` の出力（`~/.agents/skills/herdr/`） | `~/.claude/skills/herdr/`, `~/.codex/skills/herdr/` |
 
 ## Agent plugins
 
@@ -37,3 +38,10 @@ pluginの導入に成功すると、dotfilesが作成した次の旧skillリン�
 
 - `anki-add-cards`
 - `reminders-to-anki`
+
+## Herdr skill
+
+`install.sh` はインストール済みの `herdr` バイナリに同梱された skill を
+`herdr --skill` で `~/.agents/skills/herdr/SKILL.md` に書き出し、Claude Code と Codex の
+skills ディレクトリへリンクする。`herdr update` で更新した後は `./install.sh` を再実行して
+skill を追従させる。
