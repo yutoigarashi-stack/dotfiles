@@ -67,17 +67,15 @@ link_file "$DOTFILES_DIR/ghostty/config" "$GHOSTTY_CONFIG_DIR/config" "ghostty/c
 # Herdr
 mkdir -p "$HOME/.config/herdr"
 link_file "$DOTFILES_DIR/herdr/config.toml" "$HOME/.config/herdr/config.toml" "herdr/config.toml"
-# バイナリに同梱された skill を書き出す。CLI 構文の正はインストール済みバイナリなので、
-# GitHub からではなく `herdr --skill` から取得し、各エージェントの skills ディレクトリへリンクする
-HERDR_SKILL_DIR="$HOME/.agents/skills/herdr"
+# herdr バイナリに同梱された skill (`herdr --skill` の出力) を agents/skills/herdr に
+# コミットして管理し、各エージェントの skills ディレクトリへリンクする。
+# バイナリ側が更新されてコミット済みの内容とずれたら警告する（更新は手動で PR にする）
+HERDR_SKILL_DIR="$DOTFILES_DIR/agents/skills/herdr"
 if command -v herdr &>/dev/null; then
-    mkdir -p "$HERDR_SKILL_DIR"
-    # 出力途中で失敗しても既存の SKILL.md を壊さないよう、一時ファイル経由で置き換える
-    herdr --skill > "$HERDR_SKILL_DIR/SKILL.md.tmp"
-    mv "$HERDR_SKILL_DIR/SKILL.md.tmp" "$HERDR_SKILL_DIR/SKILL.md"
-    echo "herdr --skill -> $HERDR_SKILL_DIR/SKILL.md"
-else
-    echo "スキップ: herdr skill (herdr が見つかりません)"
+    if ! diff -q <(herdr --skill) "$HERDR_SKILL_DIR/SKILL.md" >/dev/null; then
+        echo "警告: agents/skills/herdr/SKILL.md が herdr $(herdr --version | awk '{print $2}') の \`herdr --skill\` と異なります"
+        echo "      herdr --skill > agents/skills/herdr/SKILL.md で更新してコミットしてください"
+    fi
 fi
 
 # Claude Code
@@ -90,9 +88,7 @@ link_file "$DOTFILES_DIR/claude/commands" "$HOME/.claude/commands" "claude/comma
 # リンクが壊れているため外し、実ディレクトリに skill を個別にリンクする
 remove_legacy_skill_link "$HOME/.claude/skills" "$DOTFILES_DIR/claude/skills" "claude/skills"
 mkdir -p "$HOME/.claude/skills"
-if [[ -f "$HERDR_SKILL_DIR/SKILL.md" ]]; then
-    link_file "$HERDR_SKILL_DIR" "$HOME/.claude/skills/herdr" "herdr skill (Claude Code)"
-fi
+link_file "$HERDR_SKILL_DIR" "$HOME/.claude/skills/herdr" "agents/skills/herdr"
 if command -v claude &>/dev/null; then
     claude plugin marketplace add yutoigarashi-stack/agent-skills --scope user
     claude plugin marketplace update yutoigarashi-skills
@@ -113,9 +109,7 @@ link_file "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml" "codex/co
 # ファイル単位のリンクではCodexが.rulesを読み込まないため、ディレクトリごとリンクする
 link_file "$DOTFILES_DIR/codex/rules" "$HOME/.codex/rules" "codex/rules"
 mkdir -p "$HOME/.codex/skills"
-if [[ -f "$HERDR_SKILL_DIR/SKILL.md" ]]; then
-    link_file "$HERDR_SKILL_DIR" "$HOME/.codex/skills/herdr" "herdr skill (Codex)"
-fi
+link_file "$HERDR_SKILL_DIR" "$HOME/.codex/skills/herdr" "agents/skills/herdr"
 if command -v codex &>/dev/null; then
     codex plugin marketplace add yutoigarashi-stack/agent-skills --ref main
     codex plugin marketplace upgrade yutoigarashi-skills

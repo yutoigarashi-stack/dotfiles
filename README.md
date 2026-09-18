@@ -23,7 +23,7 @@ chmod +x install.sh
 | `nvim/init.lua` | `~/.config/nvim/init.lua` |
 | `claude/agents/` | `~/.claude/agents/` |
 | `claude/commands/` | `~/.claude/commands/` |
-| `herdr --skill` の出力（`~/.agents/skills/herdr/`） | `~/.claude/skills/herdr/`, `~/.codex/skills/herdr/` |
+| `agents/skills/herdr/` | `~/.claude/skills/herdr/`, `~/.codex/skills/herdr/` |
 
 ## Agent plugins
 
@@ -41,7 +41,12 @@ pluginの導入に成功すると、dotfilesが作成した次の旧skillリン�
 
 ## Herdr skill
 
-`install.sh` はインストール済みの `herdr` バイナリに同梱された skill を
-`herdr --skill` で `~/.agents/skills/herdr/SKILL.md` に書き出し、Claude Code と Codex の
-skills ディレクトリへリンクする。`herdr update` で更新した後は `./install.sh` を再実行して
-skill を追従させる。
+`agents/skills/herdr/SKILL.md` は `herdr` バイナリに同梱された skill（`herdr --skill` の出力）を
+そのままコミットしたもので、`install.sh` が Claude Code と Codex の skills ディレクトリへリンクする。
+
+`install.sh` はインストール済みの `herdr --skill` とコミット済みの内容を比較し、
+ずれていれば警告する。`herdr update` の後に警告が出たら次のコマンドで更新し、PR にする。
+
+```bash
+herdr --skill > agents/skills/herdr/SKILL.md
+```
