@@ -6,6 +6,9 @@ plan_mode_reasoning_effort = "high"
 model = "gpt-5.6-sol"
 model_reasoning_effort = "high"
 
+[tui]
+whimsy = false
+
 [marketplaces.yutoigarashi-skills]
 source_type = "git"
 source = "https://github.com/yutoigarashi-stack/agent-skills.git"
