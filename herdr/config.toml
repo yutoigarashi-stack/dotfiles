@@ -25,6 +25,7 @@ cjk_ime_agents = ["claude"]
 
 [ui]
 agent_panel_sort = "priority"
+show_agent_labels_on_pane_borders = true
 
 # タブレイアウトを変えずに、一時的なシェルをポップアップで開く
 # （コマンド終了までセッションモーダル。Escape を含む全入力はポップアップ側が受け取る）
