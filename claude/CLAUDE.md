@@ -9,7 +9,10 @@
 - **マージ方法**: `gh pr merge <number> --squash --subject "<type>(<scope>): <説明> (#<number>)"` で squash merge する（末尾に PR 番号を付与すること）
 - **ブランチ削除**: マージ後、ローカルブランチは削除する。リモートブランチは削除しない（PR 番号から作業記録を辿れるようにするため）
 - **Stacked PR**: 変更が大きい場合や前の PR に依存する変更は、`gh stack`（`init` / `add` / `submit`）で stacked PR を作り、レビュー可能な単位に分割すること
-  - マージは `gh stack merge` ではなく上記の `gh pr merge` で PR ごとに行う（`--subject` 相当がなく、コミットメッセージ規約を満たせないため）
+  - マージは `gh stack merge` ではなく PR ごとに squash merge で行う（`--subject` 相当がなく、コミットメッセージ規約を満たせないため）
+  - スタックに入っている PR は `gh pr merge` や通常のマージ API ではマージできないため、非同期のマージ API を使う
+    - `gh api -X PUT repos/{owner}/{repo}/pulls/<number>/merge-async -f merge_method=squash -f sha=<head の SHA> -f commit_title="<type>(<scope>): <説明> (#<number>)"`
+    - 202 で受け付けられる。結果はレスポンスの `details.uuid` を使い `gh api repos/{owner}/{repo}/pulls/<number>/merge-async/<uuid>` か `gh pr view <number> --json state` で確認する
   - 依存先の PR がマージされたら `gh stack sync` を実行する。マージ済みレイヤーの取り除きと上位 PR の base 付け替えは `gh stack` が行うため、`git rebase --onto` や `gh pr edit --base` を手動で実行しないこと
   - ローカルブランチの削除は `gh stack sync --prune` で行う
 - **Git コマンド**: `git checkout` ではなく `git switch`（ブランチ切り替え）と `git restore`（ファイル復元）を使うこと
