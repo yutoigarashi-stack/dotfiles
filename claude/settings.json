@@ -98,5 +98,29 @@
   "language": "japanese",
   "defaultMode": "acceptEdits",
   "effortLevel": "high",
-  "tui": "default"
+  "tui": "default",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -n \"$HERDR_PANE_ID\" ] || exit 0; d=$(jq -r '.new_cwd // .cwd'); case \"$d\" in \"$HOME\"|\"$HOME\"/*) d=\"~${d#\"$HOME\"}\";; esac; herdr pane rename \"$HERDR_PANE_ID\" \"$d\" >/dev/null 2>&1 || true",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "CwdChanged": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -n \"$HERDR_PANE_ID\" ] || exit 0; d=$(jq -r '.new_cwd // .cwd'); case \"$d\" in \"$HOME\"|\"$HOME\"/*) d=\"~${d#\"$HOME\"}\";; esac; herdr pane rename \"$HERDR_PANE_ID\" \"$d\" >/dev/null 2>&1 || true",
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
 }
