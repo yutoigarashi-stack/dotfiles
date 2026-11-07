@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Install validation tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes fish shellcheck lua5.1
+      - name: Check shell scripts
+        run: |
+          bash -n install.sh
+          shellcheck install.sh
+          fish -n fish/config.fish
+      - name: Check Lua syntax
+        run: luac -p nvim/init.lua
+      - name: Check configuration files and lockfile
+        run: python3 scripts/check-config.py
+      - name: Check dry-run without running installers
+        run: python3 scripts/check-dry-run.py
