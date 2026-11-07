@@ -19,6 +19,22 @@ Homebrew が必要です。既存のファイル・ディレクトリ・リン�
 同じ場所の `.backup.<日時>` へ退避して置き換えます。同名のバックアップがあれば連番を付けます。
 `--dry-run` は確認入力を求めず、置き換えを承認した場合の予定を表示します。
 
+## CI
+
+GitHub Actions で PR と main への push 時に次を確認する。
+
+- Bash / fish / Lua の構文と ShellCheck
+- Git 管理された JSON / TOML の構文
+- Neovim のプラグイン一覧と lockfile の一致
+- dry-run 中にインストーラーが実行されないこと
+
+設定ファイルと dry-run のチェックは Python 3.11 以降でローカル実行できる。
+
+```bash
+python3 scripts/check-config.py
+python3 scripts/check-dry-run.py
+```
+
 ## 配置先
 
 | ファイル | シンボリックリンク先 |
