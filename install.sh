@@ -54,7 +54,8 @@ link_file() {
                 return
             fi
         fi
-        local backup_base="${dest}.backup.$(date +%Y%m%d%H%M%S)"
+        local backup_base
+        backup_base="${dest}.backup.$(date +%Y%m%d%H%M%S)"
         local backup="$backup_base"
         local index=0
         while [[ -e "$backup" || -L "$backup" ]]; do
