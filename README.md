@@ -21,9 +21,16 @@ chmod +x install.sh
 | `codex/config.toml` | `~/.codex/config.toml` |
 | `codex/rules/` | `~/.codex/rules/` |
 | `nvim/init.lua` | `~/.config/nvim/init.lua` |
+| `nvim/lazy-lock.json` | `~/.config/nvim/lazy-lock.json` |
 | `claude/agents/` | `~/.claude/agents/` |
 | `claude/commands/` | `~/.claude/commands/` |
 | `agents/skills/herdr/` | `~/.claude/skills/herdr/`, `~/.codex/skills/herdr/` |
+
+## Neovim のプラグインバージョン
+
+`nvim/lazy-lock.json` で lazy.nvim のプラグインのリビジョンを管理する。
+`install.sh` でリンクした後、`:Lazy update` で更新した際は、このファイルの変更もコミットする。
+記録したリビジョンを復元するには `:Lazy restore` を実行する。
 
 ## Agent plugins
 

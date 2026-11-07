@@ -124,5 +124,6 @@ fi
 # Neovim
 mkdir -p "$HOME/.config/nvim"
 link_file "$DOTFILES_DIR/nvim/init.lua" "$HOME/.config/nvim/init.lua" "nvim/init.lua"
+link_file "$DOTFILES_DIR/nvim/lazy-lock.json" "$HOME/.config/nvim/lazy-lock.json" "nvim/lazy-lock.json"
 
 echo "完了"
