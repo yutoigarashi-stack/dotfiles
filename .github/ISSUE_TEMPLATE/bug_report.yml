@@ -1,0 +1,31 @@
+name: 不具合報告
+description: 設定やセットアップが期待どおりに動かない
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 起きていること
+      description: 実際の動作と、期待する動作を記載してください。
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 再現手順
+      description: 実行したコマンドや操作、関連する設定ファイルを記載してください。
+      placeholder: |
+        1.
+        2.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 環境
+      description: 関係する OS、ツールのバージョン、発生する条件など。
+      placeholder: '例: macOS / Apple Silicon、fish のバージョン'
+  - type: textarea
+    id: logs
+    attributes:
+      label: ログ・補足
+      description: 関連するエラーや調査結果があれば記載してください。認証情報は除いてください。

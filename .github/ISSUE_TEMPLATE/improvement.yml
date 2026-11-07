@@ -1,0 +1,25 @@
+name: 改善提案
+description: 設定・ツール・開発フローの追加や改善
+body:
+  - type: textarea
+    id: motivation
+    attributes:
+      label: 改善したいこと
+      description: 現在の困りごとや、実現したい使い方を記載してください。
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 提案
+      description: 変更したい設定や導入したいツールなど。未定の場合は空欄で構いません。
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 代替案・影響
+      description: 他の方法、既存設定との互換性、移行の必要性など、分かっている範囲で。
+  - type: textarea
+    id: references
+    attributes:
+      label: 参考情報
+      description: 公式ドキュメントや関連する Issue・PR があれば記載してください。
