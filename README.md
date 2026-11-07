@@ -9,6 +9,16 @@ chmod +x install.sh
 ./install.sh
 ```
 
+変更せずにリンク作成・バックアップ・plugin 導入の予定を確認するには:
+
+```bash
+./install.sh --dry-run
+```
+
+Homebrew が必要です。既存のファイル・ディレクトリ・リンクは、確認してから
+同じ場所の `.backup.<日時>` へ退避して置き換えます。同名のバックアップがあれば連番を付けます。
+`--dry-run` は確認入力を求めず、置き換えを承認した場合の予定を表示します。
+
 ## 配置先
 
 | ファイル | シンボリックリンク先 |
@@ -22,8 +32,6 @@ chmod +x install.sh
 | `codex/rules/` | `~/.codex/rules/` |
 | `nvim/init.lua` | `~/.config/nvim/init.lua` |
 | `nvim/lazy-lock.json` | `~/.config/nvim/lazy-lock.json` |
-| `claude/agents/` | `~/.claude/agents/` |
-| `claude/commands/` | `~/.claude/commands/` |
 | `agents/skills/herdr/` | `~/.claude/skills/herdr/`, `~/.codex/skills/herdr/` |
 
 ## Neovim のプラグインバージョン
