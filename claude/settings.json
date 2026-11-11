@@ -31,7 +31,22 @@
       "Bash(gh pr edit:*)",
       "Bash(gh pr ready * --undo*)",
       "Bash(git worktree remove:*)",
-      "Bash(git rebase:*)"
+      "Bash(git rebase:*)",
+      "Bash(gh stack view:*)",
+      "Bash(gh stack init:*)",
+      "Bash(gh stack add:*)",
+      "Bash(gh stack checkout:*)",
+      "Bash(gh stack top:*)",
+      "Bash(gh stack bottom:*)",
+      "Bash(gh stack up:*)",
+      "Bash(gh stack down:*)",
+      "Bash(gh stack trunk:*)",
+      "Bash(gh stack switch:*)",
+      "Bash(gh stack rebase:*)",
+      "Bash(gh stack modify:*)",
+      "Bash(gh stack unstack:*)",
+      "Bash(gh stack delete:*)",
+      "Bash(gh stack alias:*)"
     ],
     "deny": [
       "Bash(sudo:*)",
@@ -65,7 +80,8 @@
       "Bash(psql:*)",
       "Bash(mysql:*)",
       "Bash(mongod:*)",
-      "Bash(gh repo delete:*)"
+      "Bash(gh repo delete:*)",
+      "Bash(gh stack merge:*)"
     ],
     "ask": [
       "Bash(curl:*)",
@@ -76,6 +92,10 @@
       "Bash(git stash drop:*)",
       "Bash(git stash clear:*)",
       "Bash(git push:*)",
+      "Bash(gh stack push:*)",
+      "Bash(gh stack sync:*)",
+      "Bash(gh stack submit:*)",
+      "Bash(gh stack link:*)",
       "Bash(git worktree remove * -f*)",
       "Bash(git worktree remove * --force*)",
       "Bash(gh pr create:*)",
